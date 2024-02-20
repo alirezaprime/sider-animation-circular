@@ -56,13 +56,35 @@
 }
 .bg-slide .circle.small {
   clip-path: circle(30% at 50% 50%);
-}
-.bg-slide.active .circle.small {
   z-index: 12;
 }
+
 .bg-slide .circle img {
   object-fit: cover;
-  transform: rotate(0deg) scale(2);
+  transform: rotate(0deg) scale(4.2);
+  opacity: 0;
+  transition: transform 1.5s cubic-bezier(0.645, 0.045, 0.355, 1),
+    opacity 1s cubic-bezier(0.645, 0.045, 0.355, 1);
+}
+.bg-slide.active .circle img {
+  transform: rotate(360deg) scale(2.2);
+  opacity: 1;
+}
+.bg-slide.after-active .circle img {
+  transform: rotate(720deg) scale(4.2);
+  opacity: 0;
+}
+.bg-slide.active .circle.bg img,
+.bg-slide.after-active .circle.bg img {
+  transition-delay: 0.9s;
+}
+.bg-slide.active .circle.large img,
+.bg-slide.after-active .circle.large img {
+  transition-delay: 0.6s;
+}
+.bg-slide.active .circle.small img,
+.bg-slide.after-active .circle.small img {
+  transition-delay: 0.3s;
 }
 .bg-slide .circle {
   pointer-events: none;
@@ -85,8 +107,13 @@
   flex-direction: column;
   align-items: center;
 }
-.bg-slide.active .content-text{
-    z-index: 101;
+.bg-slide.active .content-text {
+  z-index: 101;
+}
+.content-text .place,
+.content-text .country {
+  /* background: seagreen; */
+  overflow: hidden;
 }
 .content-text .country {
   margin-top: 60px;
@@ -96,6 +123,9 @@
   color: #fff;
   text-transform: uppercase;
   line-height: 1;
+  opacity: 0;
+  transition: transform 0.5s cubic-bezier(0.645, 0.045, 0.355, 1);
+  transition-delay: 1s;
 }
 .content-text .place h1 {
   /* background: salmon; */
@@ -103,13 +133,28 @@
   letter-spacing: 80px;
   margin-right: -80px;
   font-weight: 600;
+  transform: translateY(100%);
 }
 .content-text .country h2 {
   font-size: 50px;
   letter-spacing: 30px;
   margin-right: -30px;
   font-weight: 600;
+  transform: translateY(-100%);
   /* background: seagreen; */
+}
+.bg-slide.active .content-text .place h1,
+.bg-slide.active .content-text .country h2 {
+  transform: translateY(0%);
+  opacity: 1;
+}
+.bg-slide.after-active .content-text .place h1 {
+  transform: translateY(-100%);
+  opacity: 1;
+}
+.bg-slide.after-active .content-text .country h2 {
+  transform: translateY(100%);
+  opacity: 1;
 }
 .line {
   position: absolute;
@@ -135,6 +180,12 @@
   justify-content: center;
   align-items: center;
   border-radius: 50%;
+}
+.rotate-btn.active {
+  transform: rotate(360deg);
+  pointer-events: none;
+  transition: transform 0.5s cubic-bezier(0.645, 0.045, 0.355, 1);
+  transition-delay: 0.2s;
 }
 .rotate-btn i {
   font-size: 40px;
